@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>AI hand detection</title>
+  <title>AI Hand Detection</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,35 +11,47 @@
 </head>
 
 <body>
-  <h2 id="loadingText">Loading...</h2>
-  <!-- video with size of 0px because of chrome -->
-  <video playsinline autoplay muted controls="true" id="video"></video>
-  <br><br>
-  <canvas id="c1" class="mirror"></canvas>
-  <br><br>
-  <table>
-    <tr>
-      <td>AI:</td>
-      <td>
-        <div class="switch">
-          <label>
-            Off
-            <input type="checkbox" id="ai" disabled>
-            <span class="lever"></span>
-            On
-          </label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>FPS:</td>
-      <td>
-        <p class="range-field">
-          <input type="range" id="fps" min="1" max="40" value="30">
-        </p>
-      </td>
-    </tr>
-  </table>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="app-title">AI Hand Detection</h1>
+      <p class="app-subtitle">Track hand landmarks in real time from your camera</p>
+    </header>
+
+    <h2 id="loadingText" class="loading-text">Loading model and camera...</h2>
+
+    <!-- video with size of 0px because of chrome -->
+    <video playsinline autoplay muted controls="true" id="video"></video>
+
+    <div class="stage">
+      <canvas id="c1" class="mirror preview-canvas"></canvas>
+    </div>
+
+    <section class="controls panel">
+      <table>
+        <tr>
+          <td>AI:</td>
+          <td>
+            <div class="switch">
+              <label>
+                Off
+                <input type="checkbox" id="ai" disabled>
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>FPS:</td>
+          <td>
+            <p class="range-field">
+              <input type="range" id="fps" min="1" max="40" value="30">
+            </p>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </div>
 
   <!-- is needed to prevent lag at first predict -->
   <img src="mouse/pointer.png" id="img" style="display: none;">

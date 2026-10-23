@@ -1,5 +1,54 @@
+:root {
+    --bg: #0f1419;
+    --surface: #1a2332;
+    --border: #2d3a4f;
+    --text: #e8eef7;
+    --muted: #8b9bb4;
+    --accent: #3d9cf0;
+    --accent-soft: rgba(61, 156, 240, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
+    margin: 0;
+    min-height: 100vh;
     text-align: center;
+    background: radial-gradient(ellipse at top, #1a2740 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.app {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+}
+
+.app-header {
+    margin-bottom: 1.75rem;
+}
+
+.app-title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.75rem, 4vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.app-subtitle {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.loading-text {
+    margin: 1rem 0;
+    color: var(--accent);
+    font-size: 1.15rem;
+    font-weight: 500;
 }
 
 video {
@@ -7,15 +56,50 @@ video {
     height: 0px;
 }
 
-table {
+.stage {
+    display: inline-block;
+    margin: 0.5rem 0 1.5rem;
+    padding: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.preview-canvas {
+    display: block;
+    max-width: 100%;
+    border-radius: 10px;
+    background: #000;
+}
+
+.panel {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.controls table {
     width: auto;
     margin: auto;
 }
 
-tr,
-td {
+.controls tr,
+.controls td {
     border: 0px;
     text-align: center;
+    color: var(--text);
+    padding: 0.35rem 0.75rem;
+}
+
+.switch label {
+    color: var(--muted);
+}
+
+.range-field input[type=range] {
+    border: none;
 }
 
 .mirror {
