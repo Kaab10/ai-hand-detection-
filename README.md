@@ -8,6 +8,8 @@ This is a web AI hand detection. You can use it in your web browser. This web ap
 - ✅ Range slider to control frame rate
 - ✅ Mouse example to show a possible usage case
 - ✅ Configurable border in mouse example
+- ✅ Dark themed UI with live tracking status
+- ✅ Color-coded finger landmarks
 
 ## 🖼️ Images
 <a href="https://ibb.co/T15LJDH"><img src="https://i.ibb.co/Vx8mb0v/Screenshot-2021-04-08-AI-hand-detection.png" alt="live AI-hand-detection"></a>
