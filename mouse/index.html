@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Hand mouse control</title>
+  <title>Hand Mouse Control</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,44 +11,56 @@
 </head>
 
 <body>
-  <h2 id="loadingText">Loading...</h2>
-  <!-- video with size of 0px because of chrome -->
-  <video playsinline autoplay muted controls="true" id="video"></video>
-  <br><br>
-  <canvas id="c1" class="mirror"></canvas>
-  <canvas id="mouse" class="mouse"></canvas>
-  <br><br>
-  <table>
-    <tr>
-      <td>AI:</td>
-      <td>
-        <div class="switch">
-          <label>
-            Off
-            <input type="checkbox" id="ai" disabled>
-            <span class="lever"></span>
-            On
-          </label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>Border:</td>
-      <td>
-        <p class="range-field">
-          <input type="range" id="border" min="0" max="500" value="200" step="100">
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>FPS:</td>
-      <td>
-        <p class="range-field">
-          <input type="range" id="fps" min="1" max="40" value="30">
-        </p>
-      </td>
-    </tr>
-  </table>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="app-title">Hand Mouse Control</h1>
+      <p class="app-subtitle">Move the pointer with your hand inside the yellow border</p>
+    </header>
+
+    <h2 id="loadingText" class="loading-text">Loading model and camera...</h2>
+
+    <!-- video with size of 0px because of chrome -->
+    <video playsinline autoplay muted controls="true" id="video"></video>
+
+    <div class="stage">
+      <canvas id="c1" class="mirror preview-canvas"></canvas>
+    </div>
+    <canvas id="mouse" class="mouse"></canvas>
+
+    <section class="controls panel">
+      <table>
+        <tr>
+          <td>AI:</td>
+          <td>
+            <div class="switch">
+              <label>
+                Off
+                <input type="checkbox" id="ai" disabled>
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Border:</td>
+          <td>
+            <p class="range-field">
+              <input type="range" id="border" min="0" max="500" value="200" step="100">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>FPS:</td>
+          <td>
+            <p class="range-field">
+              <input type="range" id="fps" min="1" max="40" value="30">
+            </p>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </div>
 
   <!-- is needed to prevent lag at first predict -->
   <img src="pointer.png" id="img" style="display: none;">
