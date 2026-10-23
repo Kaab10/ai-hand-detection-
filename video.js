@@ -8,6 +8,14 @@ var cameraAvailable = false;
 var aiEnabled = false;
 var fps = 16;
 
+const FINGER_COLORS = {
+    thumb: "#ff6b6b",
+    indexFinger: "#feca57",
+    middleFinger: "#48dbfb",
+    ringFinger: "#1dd1a1",
+    pinky: "#5f27cd"
+};
+
 /* Setting up the constraint */
 var facingMode = "user"; // Can be 'user' or 'environment' to access back or front camera (NEAT!)
 var constraints = {
@@ -86,6 +94,22 @@ function changeFps() {
     fps = 1000 / document.getElementById("fps").value;
 }
 
+function drawFinger(points, color) {
+    if (!points || points.length === 0) {
+        return;
+    }
+    ctx1.beginPath();
+    ctx1.strokeStyle = color;
+    ctx1.lineWidth = 3;
+    ctx1.lineJoin = "round";
+    ctx1.lineCap = "round";
+    ctx1.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length; i++) {
+        ctx1.lineTo(points[i][0], points[i][1]);
+    }
+    ctx1.stroke();
+}
+
 function ai() {
     // Detect hand in the canvas element
     handpose.predict(c1, results => {
@@ -95,57 +119,23 @@ function ai() {
             const element = results[index];
             // box
             ctx1.beginPath();
-            ctx1.strokeStyle = "green";
+            ctx1.strokeStyle = "#2ecc71";
+            ctx1.lineWidth = 2;
             ctx1.rect(element.boundingBox.topLeft[0], element.boundingBox.topLeft[1], element.boundingBox.bottomRight[0] - element.boundingBox.topLeft[0], element.boundingBox.bottomRight[1] - element.boundingBox.topLeft[1]);
             ctx1.stroke();
-            ctx1.beginPath();
-            ctx1.strokeStyle = "red";
-            // thumb
-            const thumb = element.annotations.thumb;
-            ctx1.moveTo(thumb[0][0], thumb[0][1]);
-            for (let i = 1; i < thumb.length; i++) {
-                const ele = thumb[i];
-                ctx1.lineTo(ele[0], ele[1]);
-                ctx1.moveTo(ele[0], ele[1]);
-            }
-            // indexFinger
-            const indexFinger = element.annotations.indexFinger;
-            ctx1.moveTo(indexFinger[0][0], indexFinger[0][1]);
-            for (let i = 1; i < indexFinger.length; i++) {
-                const ele = indexFinger[i];
-                ctx1.lineTo(ele[0], ele[1]);
-                ctx1.moveTo(ele[0], ele[1]);
-            }
-            // middleFinger
-            const middleFinger = element.annotations.middleFinger;
-            ctx1.moveTo(middleFinger[0][0], middleFinger[0][1]);
-            for (let i = 1; i < middleFinger.length; i++) {
-                const ele = middleFinger[i];
-                ctx1.lineTo(ele[0], ele[1]);
-                ctx1.moveTo(ele[0], ele[1]);
-            }
-            // ringFinger
-            const ringFinger = element.annotations.ringFinger;
-            ctx1.moveTo(ringFinger[0][0], ringFinger[0][1]);
-            for (let i = 1; i < ringFinger.length; i++) {
-                const ele = ringFinger[i];
-                ctx1.lineTo(ele[0], ele[1]);
-                ctx1.moveTo(ele[0], ele[1]);
-            }
-            // pinky
-            const pinky = element.annotations.pinky;
-            ctx1.moveTo(pinky[0][0], pinky[0][1]);
-            for (let i = 1; i < pinky.length; i++) {
-                const ele = pinky[i];
-                ctx1.lineTo(ele[0], ele[1]);
-                ctx1.moveTo(ele[0], ele[1]);
-            }
-            ctx1.stroke();
+
+            drawFinger(element.annotations.thumb, FINGER_COLORS.thumb);
+            drawFinger(element.annotations.indexFinger, FINGER_COLORS.indexFinger);
+            drawFinger(element.annotations.middleFinger, FINGER_COLORS.middleFinger);
+            drawFinger(element.annotations.ringFinger, FINGER_COLORS.ringFinger);
+            drawFinger(element.annotations.pinky, FINGER_COLORS.pinky);
+
             // palmBase
             const palmBase = element.annotations.palmBase;
             for (let i = 0; i < palmBase.length; i++) {
                 ctx1.beginPath();
-                ctx1.strokeStyle = "blue";
+                ctx1.strokeStyle = "#54a0ff";
+                ctx1.lineWidth = 2;
                 const ele = palmBase[i];
                 ctx1.arc(ele[0], ele[1], 10, 0, 2 * Math.PI);
                 ctx1.stroke();
@@ -155,10 +145,10 @@ function ai() {
             const landmarks = element.landmarks;
             for (let i = 0; i < landmarks.length; i++) {
                 ctx1.beginPath();
-                ctx1.strokeStyle = "blue";
+                ctx1.strokeStyle = "#54a0ff";
                 const ele = landmarks[i];
-                ctx1.arc(ele[0], ele[1], 2, 0, 2 * Math.PI);
-                ctx1.fillStyle = "blue";
+                ctx1.arc(ele[0], ele[1], 3, 0, 2 * Math.PI);
+                ctx1.fillStyle = "#54a0ff";
                 ctx1.fill();
                 ctx1.stroke();
             }
