@@ -108,6 +108,12 @@ video {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel:hover {
+    border-color: #3a4d6a;
+    box-shadow: 0 0 0 1px rgba(61, 156, 240, 0.12);
 }
 
 .controls table {
@@ -120,15 +126,28 @@ video {
     border: 0px;
     text-align: center;
     color: var(--text);
-    padding: 0.35rem 0.75rem;
+    padding: 0.45rem 0.85rem;
+    vertical-align: middle;
+}
+
+.controls td:first-child {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: right;
 }
 
 .switch label {
     color: var(--muted);
 }
 
+.range-field {
+    margin: 0;
+}
+
 .range-field input[type=range] {
     border: none;
+    margin: 0;
 }
 
 .mouse {
