@@ -88,6 +88,24 @@ function setResolution() {
 
 function toggleAi() {
     aiEnabled = document.getElementById("ai").checked;
+    updateStatus(aiEnabled ? 0 : null);
+}
+
+function updateStatus(handCount) {
+    const badge = document.getElementById("statusBadge");
+    const countEl = document.getElementById("handCount");
+    if (!badge || !countEl) {
+        return;
+    }
+    if (handCount === null) {
+        badge.textContent = "AI off";
+        badge.className = "status-badge is-idle";
+        countEl.textContent = "Hands: 0";
+        return;
+    }
+    badge.textContent = "Tracking";
+    badge.className = "status-badge is-active";
+    countEl.textContent = "Hands: " + handCount;
 }
 
 function changeFps() {
@@ -115,6 +133,7 @@ function ai() {
     handpose.predict(c1, results => {
         // do something with the results
         console.log(results);
+        updateStatus(results.length);
         for (let index = 0; index < results.length; index++) {
             const element = results[index];
             // box
